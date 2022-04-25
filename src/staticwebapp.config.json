@@ -1,0 +1,33 @@
+{
+    "routes": [
+        {
+            "route": "/admin/*",
+            "allowedRoles": [ "admin" ]
+        },
+        {
+            "route": "/authenticated/*",
+            "allowedRoles": [ "authenticated" ]
+        }
+    ],
+    "auth": {
+        "rolesSource": "/api/message",
+        "identityProviders": {
+            "azureActiveDirectory": {
+                "userDetailsClaim": "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name",
+                "registration": {
+                    "openIdIssuer": "https://login.microsoftonline.com/f98c31bd-c8bd-4e21-8eb6-255ba02ab18c",
+                    "clientIdSettingName": "AAD_CLIENT_ID",
+                    "clientSecretSettingName": "AAD_CLIENT_SECRET"
+                },
+                "login": {
+                    "loginParameters": [
+                        "resource=https://graph.microsoft.com"
+                    ]
+                }
+            }
+        }
+    },
+    "globalHeaders": {
+        "Cache-Control": "no-cache"
+    }
+}
